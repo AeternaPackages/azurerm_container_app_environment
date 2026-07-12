@@ -5,7 +5,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_apps, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -14,7 +14,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_environment_certificates, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -23,7 +23,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_environment_custom_domains, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -32,7 +32,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_environment_dapr_components, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -41,7 +41,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_environment_managed_certificates, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -50,7 +50,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_environment_storages, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -59,7 +59,7 @@ locals {
     for k1, v1 in var.container_app_environments : {
       for k2, v2 in coalesce(v1.container_app_jobs, {}) :
       "${k1}/${k2}" => merge(v2, {
-        container_app_environment_id = module.container_app_environments.container_app_environments["${k1}"].id
+        container_app_environment_id = module.container_app_environments.container_app_environments_id["${k1}"]
       })
     }
   ]...)
@@ -69,7 +69,7 @@ locals {
       for k2, v2 in coalesce(v1.container_apps, {}) : {
         for k3, v3 in coalesce(v2.container_app_custom_domains, {}) :
         "${k1}/${k2}/${k3}" => merge(v3, {
-          container_app_id = module.container_apps.container_apps["${k1}/${k2}"].id
+          container_app_id = module.container_apps.container_apps_id["${k1}/${k2}"]
         })
       }
     ]...)
