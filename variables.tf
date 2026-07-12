@@ -116,12 +116,12 @@ EOT
       identity_ids = optional(set(string))
       type         = string
     }))
-    workload_profile = optional(object({
+    workload_profile = optional(list(object({
       maximum_count         = optional(number)
       minimum_count         = optional(number)
       name                  = string
       workload_profile_type = string
-    }))
+    })))
     container_apps = optional(map(object({
       name                   = string
       resource_group_name    = string
@@ -130,7 +130,7 @@ EOT
       tags                   = optional(map(string))
       workload_profile_name  = optional(string)
       template = object({
-        azure_queue_scale_rule = optional(object({
+        azure_queue_scale_rule = optional(list(object({
           authentication = list(object({
             secret_name       = string
             trigger_parameter = string
@@ -138,7 +138,7 @@ EOT
           name         = string
           queue_length = number
           queue_name   = string
-        }))
+        })))
         container = list(object({
           args    = optional(list(string))
           command = optional(list(string))
@@ -151,10 +151,10 @@ EOT
           image = string
           liveness_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host             = optional(string)
             initial_delay    = optional(number) # Default: 1
             interval_seconds = optional(number) # Default: 10
@@ -167,10 +167,10 @@ EOT
           name   = string
           readiness_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host                    = optional(string)
             initial_delay           = optional(number) # Default: 0
             interval_seconds        = optional(number) # Default: 10
@@ -182,10 +182,10 @@ EOT
           })))
           startup_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host             = optional(string)
             initial_delay    = optional(number) # Default: 0
             interval_seconds = optional(number) # Default: 10
@@ -194,14 +194,14 @@ EOT
             timeout          = optional(number) # Default: 1
             transport        = string
           })))
-          volume_mounts = optional(object({
+          volume_mounts = optional(list(object({
             name     = string
             path     = string
             sub_path = optional(string)
-          }))
+          })))
         }))
         cooldown_period_in_seconds = optional(number) # Default: 300
-        custom_scale_rule = optional(object({
+        custom_scale_rule = optional(list(object({
           authentication = optional(list(object({
             secret_name       = string
             trigger_parameter = string
@@ -210,15 +210,15 @@ EOT
           identity_id      = optional(string)
           metadata         = map(string)
           name             = string
-        }))
-        http_scale_rule = optional(object({
+        })))
+        http_scale_rule = optional(list(object({
           authentication = optional(list(object({
             secret_name       = string
             trigger_parameter = optional(string)
           })))
           concurrent_requests = string
           name                = string
-        }))
+        })))
         init_container = optional(list(object({
           args    = optional(list(string))
           command = optional(list(string))
@@ -231,24 +231,24 @@ EOT
           image  = string
           memory = optional(string)
           name   = string
-          volume_mounts = optional(object({
+          volume_mounts = optional(list(object({
             name     = string
             path     = string
             sub_path = optional(string)
-          }))
+          })))
         })))
         max_replicas                = optional(number) # Default: 10
         min_replicas                = optional(number) # Default: 0
         polling_interval_in_seconds = optional(number) # Default: 30
         revision_suffix             = optional(string)
-        tcp_scale_rule = optional(object({
+        tcp_scale_rule = optional(list(object({
           authentication = optional(list(object({
             secret_name       = string
             trigger_parameter = optional(string)
           })))
           concurrent_requests = string
           name                = string
-        }))
+        })))
         termination_grace_period_seconds = optional(number) # Default: 0
         volume = optional(list(object({
           mount_options = optional(string)
@@ -279,19 +279,19 @@ EOT
         }))
         exposed_port     = optional(number)
         external_enabled = optional(bool) # Default: false
-        ip_security_restriction = optional(object({
+        ip_security_restriction = optional(list(object({
           action           = string
           description      = optional(string)
           ip_address_range = string
           name             = string
-        }))
+        })))
         target_port = number
-        traffic_weight = object({
+        traffic_weight = list(object({
           label           = optional(string)
           latest_revision = optional(bool) # Default: false
           percentage      = number
           revision_suffix = optional(string)
-        })
+        }))
         transport = optional(string) # Default: "auto"
       }))
       registry = optional(list(object({
@@ -300,12 +300,12 @@ EOT
         server               = string
         username             = optional(string)
       })))
-      secret = optional(object({
+      secret = optional(list(object({
         identity            = optional(string)
         key_vault_secret_id = optional(string)
         name                = string
         value               = optional(string)
-      }))
+      })))
       container_app_custom_domains = optional(map(object({
         name                                     = string
         certificate_binding_type                 = optional(string)
@@ -339,12 +339,12 @@ EOT
         secret_name = optional(string)
         value       = optional(string)
       })))
-      secret = optional(object({
+      secret = optional(list(object({
         identity            = optional(string)
         key_vault_secret_id = optional(string)
         name                = string
         value               = optional(string)
-      }))
+      })))
     })))
     container_app_environment_managed_certificates = optional(map(object({
       name                      = string
@@ -381,10 +381,10 @@ EOT
           image = string
           liveness_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host             = optional(string)
             initial_delay    = optional(number) # Default: 1
             interval_seconds = optional(number) # Default: 10
@@ -397,10 +397,10 @@ EOT
           name   = string
           readiness_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host                    = optional(string)
             initial_delay           = optional(number) # Default: 0
             interval_seconds        = optional(number) # Default: 10
@@ -412,10 +412,10 @@ EOT
           })))
           startup_probe = optional(list(object({
             failure_count_threshold = optional(number) # Default: 3
-            header = optional(object({
+            header = optional(list(object({
               name  = string
               value = string
-            }))
+            })))
             host             = optional(string)
             initial_delay    = optional(number) # Default: 0
             interval_seconds = optional(number) # Default: 10
@@ -424,11 +424,11 @@ EOT
             timeout          = optional(number) # Default: 1
             transport        = string
           })))
-          volume_mounts = optional(object({
+          volume_mounts = optional(list(object({
             name     = string
             path     = string
             sub_path = optional(string)
-          }))
+          })))
         }))
         init_container = optional(list(object({
           args    = optional(list(string))
@@ -442,11 +442,11 @@ EOT
           image  = string
           memory = optional(string)
           name   = string
-          volume_mounts = optional(object({
+          volume_mounts = optional(list(object({
             name     = string
             path     = string
             sub_path = optional(string)
-          }))
+          })))
         })))
         volume = optional(list(object({
           mount_options = optional(string)
@@ -458,11 +458,11 @@ EOT
       event_trigger_config = optional(object({
         parallelism              = optional(number) # Default: 1
         replica_completion_count = optional(number) # Default: 1
-        scale = optional(object({
+        scale = optional(list(object({
           max_executions              = optional(number) # Default: 100
           min_executions              = optional(number) # Default: 0
           polling_interval_in_seconds = optional(number) # Default: 30
-          rules = optional(object({
+          rules = optional(list(object({
             authentication = optional(list(object({
               secret_name       = string
               trigger_parameter = string
@@ -471,8 +471,8 @@ EOT
             identity_id      = optional(string)
             metadata         = map(string)
             name             = string
-          }))
-        }))
+          })))
+        })))
       }))
       identity = optional(object({
         identity_ids = optional(set(string))
@@ -493,12 +493,12 @@ EOT
         parallelism              = optional(number) # Default: 1
         replica_completion_count = optional(number) # Default: 1
       }))
-      secret = optional(object({
+      secret = optional(list(object({
         identity            = optional(string)
         key_vault_secret_id = optional(string)
         name                = string
         value               = optional(string)
-      }))
+      })))
     })))
   }))
 
