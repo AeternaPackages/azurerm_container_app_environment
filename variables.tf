@@ -7,6 +7,8 @@ Required:
     - resource_group_name
 Optional:
     - dapr_application_insights_connection_string
+    - dapr_application_insights_connection_string_key_vault_id (alternative to dapr_application_insights_connection_string - read from Key Vault instead)
+    - dapr_application_insights_connection_string_key_vault_secret_name (alternative to dapr_application_insights_connection_string - read from Key Vault instead)
     - infrastructure_resource_group_name
     - infrastructure_subnet_id
     - internal_load_balancer_enabled
@@ -45,12 +47,16 @@ Nested container_app_environment_certificates (azurerm_container_app_environment
     Optional:
         - certificate_blob_base64
         - certificate_password
+        - certificate_password_key_vault_id (alternative to certificate_password - read from Key Vault instead)
+        - certificate_password_key_vault_secret_name (alternative to certificate_password - read from Key Vault instead)
         - tags
         - certificate_key_vault (block)
 Nested container_app_environment_custom_domains (azurerm_container_app_environment_custom_domain):
     Required:
         - certificate_blob_base64
         - certificate_password
+        - certificate_password_key_vault_id (alternative to certificate_password - read from Key Vault instead)
+        - certificate_password_key_vault_secret_name (alternative to certificate_password - read from Key Vault instead)
         - dns_suffix
 Nested container_app_environment_dapr_components (azurerm_container_app_environment_dapr_component):
     Required:
@@ -77,6 +83,8 @@ Nested container_app_environment_storages (azurerm_container_app_environment_sto
         - share_name
     Optional:
         - access_key
+        - access_key_key_vault_id (alternative to access_key - read from Key Vault instead)
+        - access_key_key_vault_secret_name (alternative to access_key - read from Key Vault instead)
         - account_name
         - nfs_server_url
 Nested container_app_jobs (azurerm_container_app_job):
@@ -99,19 +107,21 @@ Nested container_app_jobs (azurerm_container_app_job):
 EOT
 
   type = map(object({
-    location                                    = string
-    name                                        = string
-    resource_group_name                         = string
-    dapr_application_insights_connection_string = optional(string)
-    infrastructure_resource_group_name          = optional(string)
-    infrastructure_subnet_id                    = optional(string)
-    internal_load_balancer_enabled              = optional(bool) # Default: false
-    log_analytics_workspace_id                  = optional(string)
-    logs_destination                            = optional(string)
-    mutual_tls_enabled                          = optional(bool) # Default: false
-    public_network_access                       = optional(string)
-    tags                                        = optional(map(string))
-    zone_redundancy_enabled                     = optional(bool) # Default: false
+    location                                                          = string
+    name                                                              = string
+    resource_group_name                                               = string
+    dapr_application_insights_connection_string                       = optional(string)
+    dapr_application_insights_connection_string_key_vault_id          = optional(string)
+    dapr_application_insights_connection_string_key_vault_secret_name = optional(string)
+    infrastructure_resource_group_name                                = optional(string)
+    infrastructure_subnet_id                                          = optional(string)
+    internal_load_balancer_enabled                                    = optional(bool) # Default: false
+    log_analytics_workspace_id                                        = optional(string)
+    logs_destination                                                  = optional(string)
+    mutual_tls_enabled                                                = optional(bool) # Default: false
+    public_network_access                                             = optional(string)
+    tags                                                              = optional(map(string))
+    zone_redundancy_enabled                                           = optional(bool) # Default: false
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string
@@ -313,19 +323,23 @@ EOT
       })))
     })))
     container_app_environment_certificates = optional(map(object({
-      name                    = string
-      certificate_blob_base64 = optional(string)
-      certificate_password    = optional(string)
-      tags                    = optional(map(string))
+      name                                       = string
+      certificate_blob_base64                    = optional(string)
+      certificate_password                       = optional(string)
+      certificate_password_key_vault_id          = optional(string)
+      certificate_password_key_vault_secret_name = optional(string)
+      tags                                       = optional(map(string))
       certificate_key_vault = optional(object({
         identity            = optional(string) # Default: "System"
         key_vault_secret_id = string
       }))
     })))
     container_app_environment_custom_domains = optional(map(object({
-      certificate_blob_base64 = string
-      certificate_password    = string
-      dns_suffix              = string
+      certificate_blob_base64                    = string
+      certificate_password                       = string
+      certificate_password_key_vault_id          = optional(string)
+      certificate_password_key_vault_secret_name = optional(string)
+      dns_suffix                                 = string
     })))
     container_app_environment_dapr_components = optional(map(object({
       component_type = string
@@ -353,12 +367,14 @@ EOT
       tags                      = optional(map(string))
     })))
     container_app_environment_storages = optional(map(object({
-      access_mode    = string
-      name           = string
-      share_name     = string
-      access_key     = optional(string)
-      account_name   = optional(string)
-      nfs_server_url = optional(string)
+      access_mode                      = string
+      name                             = string
+      share_name                       = string
+      access_key                       = optional(string)
+      access_key_key_vault_id          = optional(string)
+      access_key_key_vault_secret_name = optional(string)
+      account_name                     = optional(string)
+      nfs_server_url                   = optional(string)
     })))
     container_app_jobs = optional(map(object({
       location                   = string
