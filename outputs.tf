@@ -1,4 +1,9 @@
 # --- azurerm_container_app_environment ---
+output "container_app_environments_id" {
+  description = "Map of id values across all container_app_environments, keyed the same as var.container_app_environments"
+  value       = module.container_app_environments.container_app_environments_id
+}
+
 output "container_app_environments_custom_domain_verification_id" {
   description = "Map of custom_domain_verification_id values across all container_app_environments, keyed the same as var.container_app_environments"
   value       = module.container_app_environments.container_app_environments_custom_domain_verification_id
@@ -106,6 +111,11 @@ output "container_app_environments_zone_redundancy_enabled" {
 }
 
 # --- azurerm_container_app ---
+output "container_apps_id" {
+  description = "Map of id values across all container_apps, keyed the same as var.container_apps"
+  value       = module.container_apps.container_apps_id
+}
+
 output "container_apps_container_app_environment_id" {
   description = "Map of container_app_environment_id values across all container_apps, keyed the same as var.container_apps"
   value       = module.container_apps.container_apps_container_app_environment_id
@@ -199,6 +209,11 @@ output "container_apps_workload_profile_name" {
 }
 
 # --- azurerm_container_app_environment_certificate ---
+output "container_app_environment_certificates_id" {
+  description = "Map of id values across all container_app_environment_certificates, keyed the same as var.container_app_environment_certificates"
+  value       = module.container_app_environment_certificates.container_app_environment_certificates_id
+}
+
 output "container_app_environment_certificates_certificate_blob_base64" {
   description = "Map of certificate_blob_base64 values across all container_app_environment_certificates, keyed the same as var.container_app_environment_certificates"
   value       = module.container_app_environment_certificates.container_app_environment_certificates_certificate_blob_base64
@@ -256,6 +271,11 @@ output "container_app_environment_certificates_thumbprint" {
 }
 
 # --- azurerm_container_app_environment_custom_domain ---
+output "container_app_environment_custom_domains_id" {
+  description = "Map of id values across all container_app_environment_custom_domains, keyed the same as var.container_app_environment_custom_domains"
+  value       = module.container_app_environment_custom_domains.container_app_environment_custom_domains_id
+}
+
 output "container_app_environment_custom_domains_certificate_blob_base64" {
   description = "Map of certificate_blob_base64 values across all container_app_environment_custom_domains, keyed the same as var.container_app_environment_custom_domains"
   value       = module.container_app_environment_custom_domains.container_app_environment_custom_domains_certificate_blob_base64
@@ -278,6 +298,11 @@ output "container_app_environment_custom_domains_dns_suffix" {
 }
 
 # --- azurerm_container_app_environment_dapr_component ---
+output "container_app_environment_dapr_components_id" {
+  description = "Map of id values across all container_app_environment_dapr_components, keyed the same as var.container_app_environment_dapr_components"
+  value       = module.container_app_environment_dapr_components.container_app_environment_dapr_components_id
+}
+
 output "container_app_environment_dapr_components_component_type" {
   description = "Map of component_type values across all container_app_environment_dapr_components, keyed the same as var.container_app_environment_dapr_components"
   value       = module.container_app_environment_dapr_components.container_app_environment_dapr_components_component_type
@@ -325,6 +350,11 @@ output "container_app_environment_dapr_components_version" {
 }
 
 # --- azurerm_container_app_environment_managed_certificate ---
+output "container_app_environment_managed_certificates_id" {
+  description = "Map of id values across all container_app_environment_managed_certificates, keyed the same as var.container_app_environment_managed_certificates"
+  value       = module.container_app_environment_managed_certificates.container_app_environment_managed_certificates_id
+}
+
 output "container_app_environment_managed_certificates_container_app_environment_id" {
   description = "Map of container_app_environment_id values across all container_app_environment_managed_certificates, keyed the same as var.container_app_environment_managed_certificates"
   value       = module.container_app_environment_managed_certificates.container_app_environment_managed_certificates_container_app_environment_id
@@ -356,6 +386,11 @@ output "container_app_environment_managed_certificates_validation_token" {
 }
 
 # --- azurerm_container_app_environment_storage ---
+output "container_app_environment_storages_id" {
+  description = "Map of id values across all container_app_environment_storages, keyed the same as var.container_app_environment_storages"
+  value       = module.container_app_environment_storages.container_app_environment_storages_id
+}
+
 output "container_app_environment_storages_access_key" {
   description = "Map of access_key values across all container_app_environment_storages, keyed the same as var.container_app_environment_storages"
   value       = module.container_app_environment_storages.container_app_environment_storages_access_key
@@ -393,6 +428,11 @@ output "container_app_environment_storages_share_name" {
 }
 
 # --- azurerm_container_app_job ---
+output "container_app_jobs_id" {
+  description = "Map of id values across all container_app_jobs, keyed the same as var.container_app_jobs"
+  value       = module.container_app_jobs.container_app_jobs_id
+}
+
 output "container_app_jobs_container_app_environment_id" {
   description = "Map of container_app_environment_id values across all container_app_jobs, keyed the same as var.container_app_jobs"
   value       = module.container_app_jobs.container_app_jobs_container_app_environment_id
@@ -480,6 +520,11 @@ output "container_app_jobs_workload_profile_name" {
 }
 
 # --- azurerm_container_app_custom_domain ---
+output "container_app_custom_domains_id" {
+  description = "Map of id values across all container_app_custom_domains, keyed the same as var.container_app_custom_domains"
+  value       = module.container_app_custom_domains.container_app_custom_domains_id
+}
+
 output "container_app_custom_domains_certificate_binding_type" {
   description = "Map of certificate_binding_type values across all container_app_custom_domains, keyed the same as var.container_app_custom_domains"
   value       = module.container_app_custom_domains.container_app_custom_domains_certificate_binding_type
